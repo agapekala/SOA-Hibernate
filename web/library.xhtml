@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: agnieszka
+  Date: 09.04.19
+  Time: 15:30
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Biblioteka</title>
+</h:head>
+
+<h:body>
+<div>
+        <h:panelGroup id="user_info" style="float: left;  margin-right: 50px">
+
+            <h2>Użytkownik</h2>
+            <p>#{libraryView.reader.name} #{libraryView.reader.last_name}</p>
+        </h:panelGroup>
+
+        <h:panelGroup id="users" style="float: left;  margin-right: 50px">
+            <h:form id="select_user">
+            <h2>Wybierz użytkownika</h2>
+            <h:selectOneMenu value="#{libraryView.id}" >
+                <f:selectItems value="#{libraryView.all_readers}" var="user"
+                               itemLabel="#{user.name} #{user.last_name}" itemValue="#{user.reader_id}"/>
+                <f:ajax event="change" render="user_info user_books all_books"/>
+
+            </h:selectOneMenu>
+
+        </h:form>
+        </h:panelGroup>
+
+    <h:panelGroup id="add_user" style="float: left; margin-right: 50px">
+        <h:form>
+            <h2>Dodaj użytkownika</h2>
+            <p>Imię: <h:inputText value="#{libraryView.name}">
+                <f:ajax event="change"/>
+            </h:inputText></p>
+            <p>Nazwisko: <h:inputText value="#{libraryView.last_name}">
+                <f:ajax event="change"/>
+            </h:inputText></p>
+            <h:commandButton value="Dodaj" >
+                <f:ajax event="click" render="user_info users" listener="#{libraryView.addReader()}"/>
+            </h:commandButton>
+        </h:form>
+    </h:panelGroup>
+
+    <h:panelGroup id="add_book" style="float: left; margin-right: 50px">
+        <h:form>
+            <h2>Dodaj książkę</h2>
+            <p>Tytuł: <h:inputText value="#{libraryView.title}">
+                <f:ajax event="change" />
+            </h:inputText> </p>
+            <p>Imię autora: <h:inputText value="#{libraryView.author_name}">
+                <f:ajax event="change"/>
+            </h:inputText> </p>
+            <p>Nazwisko autora: <h:inputText value="#{libraryView.author_last_name}">
+                <f:ajax event="change"/>
+            </h:inputText> </p>
+            <h:commandButton value="Dodaj">
+                <f:ajax event="click" render="all_books" listener="#{libraryView.addBook()}"/>
+            </h:commandButton>
+        </h:form>
+    </h:panelGroup>
+</div>
+
+    <div style="clear:both;">
+        <h:panelGroup id="all_books" style="float: left; margin-right: 50px">
+            <h:form>
+                <h2>Dostępne książki</h2>
+                <h:dataTable value="#{libraryView.all_books}" var="o">
+                    <h:column id="book_id">
+                        <f:facet name="header">Id</f:facet>
+                        #{o.book_id}
+                    </h:column>
+                    <h:column id="title">
+                        <f:facet name="header">Tytuł</f:facet>
+                        #{o.title}
+                    </h:column>
+
+                    <h:column id="name">
+                        <f:facet name="header">Imię</f:facet>
+                        #{o.author.name}
+                    </h:column>
+
+                    <h:column id="last_name">
+                        <f:facet name="header">Nazwisko</f:facet>
+                        #{o.author.last_name}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Wybierz</f:facet>
+                        <h:selectBooleanCheckbox value="#{o.checked}">
+                            <f:ajax event="change" />
+                        </h:selectBooleanCheckbox>
+                    </h:column>
+                </h:dataTable>
+                <h:commandButton value="Wypożycz">
+                    <f:ajax event="click" listener="#{libraryView.borrowBook()}" render="user_books all_books"/>
+                </h:commandButton>
+                <h:messages style="color:red" />
+            </h:form>
+
+        </h:panelGroup>
+
+        <h:panelGroup id="user_books" style="float: left; margin-right: 50px">
+            <h:form>
+            <h2>Wypożyczone książki</h2>
+            <h:dataTable value="#{libraryView.user_books}" var="b">
+                <h:column id="user_book_id">
+                    <f:facet name="header">Id</f:facet>
+                    #{b.book_id}
+                </h:column>
+
+                <h:column id="user_book_title">
+                    <f:facet name="header">Tytuł</f:facet>
+                    #{b.title}
+                </h:column>
+
+                <h:column id="user_book_name">
+                    <f:facet name="header">Imię</f:facet>
+                    #{b.author.name}
+                </h:column>
+
+                <h:column id="user_book_last_name">
+                    <f:facet name="header">Nazwisko</f:facet>
+                    #{b.author.last_name}
+                </h:column>
+
+                <h:column id="borrow_date">
+                    <f:facet name="header">Data wypożyczenia</f:facet>
+                    #{b.borrow.borrow_date}
+                </h:column>
+
+                <h:column id="return_date">
+                    <f:facet name="header">Data zwrotu</f:facet>
+                    #{b.borrow.return_date}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Wybierz</f:facet>
+                    <h:selectBooleanCheckbox value="#{b.checked}">
+                        <f:ajax event="change" />
+                    </h:selectBooleanCheckbox>
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="Zwróć książkę">
+                <f:ajax event="click" listener="#{libraryView.returnBook()}" render="user_books"/>
+            </h:commandButton>
+            </h:form>
+        </h:panelGroup>
+
+
+    </div>
+
+    <div style="clear:both;">
+        <h:panelGroup id="filtr" style="float: left; margin-right: 50px">
+            <h:form>
+                <h2>Filtruj</h2>
+
+                <div style="float: left; margin-right: 20px">
+                    <h3>Znajdź czytelników</h3>
+                    <p>Kiedy?: od <h:inputText value="#{filterView.from_date}">
+                        <f:ajax event="change" />
+                    </h:inputText>
+                        do <h:inputText value="#{filterView.to_date}">
+                            <f:ajax event="change"/>
+                        </h:inputText></p>
+
+                    <p><h:selectOneRadio value="#{filterView.read}">
+                        <f:selectItem itemValue="false" itemLabel="Wypożyczona"/>
+                        <f:selectItem itemValue="true" itemLabel="Przeczytana"/>
+                        <f:ajax event="change"/>
+                    </h:selectOneRadio> </p>
+
+                    <p><h:selectOneRadio title="Po czym filtrować?" value="#{filterView.book}">
+                        <f:selectItem itemValue="true" itemLabel="Tytuł książki"/>
+                        <f:selectItem itemValue="false" itemLabel="Autor"/>
+                        <f:ajax event="change" render="filter1"/>
+                    </h:selectOneRadio> </p>
+
+                    <h:panelGroup id="filter1">
+                    <p>Książka: <h:selectOneMenu value="#{filterView.selected_book}" disabled="#{!filterView.book}">
+                        <f:selectItem itemLabel="----------" itemValue="0"/>
+                        <f:selectItems value="#{libraryView.all_books}" var="bb"
+                                       itemValue="#{bb.book_id}" itemLabel="#{bb.title}" />
+                        <f:ajax event="change"/>
+                    </h:selectOneMenu></p>
+
+                    <p>Autor: <h:selectOneMenu value="#{filterView.selected_author}" disabled="#{filterView.book}">
+                        <f:selectItem itemLabel="--------------------------" itemValue="0"/>
+                        <f:selectItems value="#{libraryView.all_authors}" var="a"
+                                       itemValue="#{a.author_id}" itemLabel="#{a.name} #{a.last_name}"/>
+                        <f:ajax event="change"/>
+                    </h:selectOneMenu></p>
+                        <h:commandButton value="Szukaj">
+                            <f:ajax event="click" render="readers_result" listener="#{filterView.filterReaders()}"/>
+                        </h:commandButton>
+                    </h:panelGroup>
+                </div>
+                <h:panelGroup id="readers_result" style="float: left; margin-right: 20px;">
+                    <h3>Czytelnicy</h3>
+                    <ui:repeat value="#{filterView.filter_readers}" var="r">
+                        <p>#{r.name} #{r.last_name}</p>
+                    </ui:repeat>
+                </h:panelGroup>
+
+                <div style="clear: both"></div>
+                <div style="float: left; margin-right: 20px;">
+                    <h3>Znajdź autorów</h3>
+                    <p>Kiedy?: od <h:inputText value="#{filterView.from_date}">
+                        <f:ajax event="change" />
+                    </h:inputText>
+                        do <h:inputText value="#{filterView.to_date}">
+                            <f:ajax event="change"/>
+                        </h:inputText></p>
+
+                    <p>Czytelnik: <h:selectOneMenu value="#{filterView.selected_reader}">
+                        <f:selectItem itemLabel="---------------" itemValue="0"/>
+                        <f:selectItems value="#{libraryView.all_readers}" var="rr"
+                                       itemValue="#{rr.reader_id}" itemLabel="#{rr.name} #{rr.last_name}" />
+                        <f:ajax event="change"/>
+                    </h:selectOneMenu></p>
+
+                    <p><h:selectOneRadio value="#{filterView.read2}">
+                        <f:selectItem itemValue="false" itemLabel="Wypożyczona"/>
+                        <f:selectItem itemValue="true" itemLabel="Przeczytana"/>
+                        <f:ajax event="change"/>
+                    </h:selectOneRadio> </p>
+
+                    <h:commandButton value="Szukaj">
+                        <f:ajax event="click" render="authors_result" listener="#{filterView.filterAuthors()}"/>
+                    </h:commandButton>
+
+                </div>
+
+                <h:panelGroup id="authors_result" style="float: left; margin-right: 20px;">
+                    <h3>Autorzy</h3>
+                    <ui:repeat value="#{filterView.filter_authors}" var="aa">
+                        <p>#{aa.name} #{aa.last_name}</p>
+                    </ui:repeat>
+                </h:panelGroup>
+
+                <div style="clear: both"></div>
+                <div style="float: left; margin-right: 20px;">
+                    <h3>Znajdź książki</h3>
+                    <p>Autor: <h:selectOneMenu value="#{filterView.selected_author}">
+                        <f:selectItem itemLabel="--------------------------" itemValue="0"/>
+                        <f:selectItems value="#{libraryView.all_authors}" var="a"
+                                       itemValue="#{a.author_id}" itemLabel="#{a.name} #{a.last_name}"/>
+                        <f:ajax event="change"/>
+                    </h:selectOneMenu></p>
+
+                    <p>Najczęściej czytane: <h:selectBooleanCheckbox value="#{filterView.check_popularity}" >
+                        <f:ajax event="change"/>
+                    </h:selectBooleanCheckbox>
+                    </p>
+
+                    <h:commandButton value="Szukaj">
+                        <f:ajax event="click" render="books_result" listener="#{filterView.filterBooks()}"/>
+                    </h:commandButton>
+
+                </div>
+
+                <h:panelGroup id="books_result" style="float: left; margin-right: 20px;">
+                    <h3>Książki</h3>
+                    <ui:repeat value="#{filterView.filter_books}" var="bb">
+                        <p>#{bb.title}</p>
+                    </ui:repeat>
+                </h:panelGroup>
+            </h:form>
+        </h:panelGroup>
+    </div>
+
+
+    
+</h:body>
+
+</html>

@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="agh@localhost">
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.4">
+    <root id="1"/>
+    <database id="2" parent="1" name="agh">
+      <ObjectId>16384</ObjectId>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </database>
+    <database id="3" parent="1" name="postgres">
+      <ObjectId>12413</ObjectId>
+    </database>
+    <database id="4" parent="1" name="hack">
+      <ObjectId>25445</ObjectId>
+    </database>
+    <schema id="5" parent="2" name="public">
+      <ObjectId>2200</ObjectId>
+      <IntrospectionTimestamp>2019-04-14.16:00:11.335</IntrospectionTimestamp>
+      <IntrospectionStateNumber>2212</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="6" parent="2" name="pg_catalog">
+      <ObjectId>11</ObjectId>
+    </schema>
+    <schema id="7" parent="2" name="pg_toast">
+      <ObjectId>99</ObjectId>
+    </schema>
+    <schema id="8" parent="2" name="pg_temp_1">
+      <ObjectId>11816</ObjectId>
+    </schema>
+    <schema id="9" parent="2" name="pg_toast_temp_1">
+      <ObjectId>11817</ObjectId>
+    </schema>
+    <schema id="10" parent="2" name="information_schema">
+      <ObjectId>12121</ObjectId>
+    </schema>
+    <table id="11" parent="5" name="author">
+      <ObjectId>34659</ObjectId>
+      <StateNumber>2209</StateNumber>
+    </table>
+    <table id="12" parent="5" name="book">
+      <ObjectId>34667</ObjectId>
+      <StateNumber>2211</StateNumber>
+    </table>
+    <table id="13" parent="5" name="borrow">
+      <ObjectId>34672</ObjectId>
+      <StateNumber>2212</StateNumber>
+    </table>
+    <table id="14" parent="5" name="car">
+      <ObjectId>24585</ObjectId>
+      <StateNumber>708</StateNumber>
+    </table>
+    <table id="15" parent="5" name="hibernate_sequences">
+      <ObjectId>34677</ObjectId>
+      <StateNumber>2203</StateNumber>
+    </table>
+    <table id="16" parent="5" name="old_book">
+      <ObjectId>24590</ObjectId>
+      <StateNumber>1037</StateNumber>
+    </table>
+    <table id="17" parent="5" name="reader">
+      <ObjectId>34682</ObjectId>
+      <StateNumber>2212</StateNumber>
+    </table>
+    <column id="18" parent="11" name="author_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2200</StateNumber>
+    </column>
+    <column id="19" parent="11" name="last_name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>2200</StateNumber>
+    </column>
+    <column id="20" parent="11" name="name">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>2200</StateNumber>
+    </column>
+    <index id="21" parent="11" name="author_pkey">
+      <ObjectId>34665</ObjectId>
+      <ColNames>author_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="22" parent="11" name="author_pkey">
+      <ObjectId>34666</ObjectId>
+      <ColNames>author_id</ColNames>
+      <UnderlyingIndexName>author_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="23" parent="12" name="book_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2201</StateNumber>
+    </column>
+    <column id="24" parent="12" name="title">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>2201</StateNumber>
+    </column>
+    <column id="25" parent="12" name="author_id">
+      <Position>3</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>2201</StateNumber>
+    </column>
+    <column id="26" parent="12" name="borrow_id">
+      <Position>4</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>2201</StateNumber>
+    </column>
+    <index id="27" parent="12" name="book_pkey1">
+      <ObjectId>34670</ObjectId>
+      <ColNames>book_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="28" parent="12" name="book_pkey1">
+      <ObjectId>34671</ObjectId>
+      <ColNames>book_id</ColNames>
+      <UnderlyingIndexName>book_pkey1</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="29" parent="12" name="fk5gbo4o7yxefxivwuqjichc67t">
+      <ObjectId>34690</ObjectId>
+      <ColNames>author_id</ColNames>
+      <RefTableId>34659</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>author</RefTableName>
+      <RefKeyName>author_pkey</RefKeyName>
+      <RefColNames>author_id</RefColNames>
+    </foreign-key>
+    <foreign-key id="30" parent="12" name="fkhhhs3k3f9468nb7wj178cxgm8">
+      <ObjectId>34695</ObjectId>
+      <ColNames>borrow_id</ColNames>
+      <RefTableId>34672</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>borrow</RefTableName>
+      <RefKeyName>borrow_pkey</RefKeyName>
+      <RefColNames>borrow_id</RefColNames>
+    </foreign-key>
+    <column id="31" parent="13" name="borrow_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2202</StateNumber>
+    </column>
+    <column id="32" parent="13" name="borrow_date">
+      <Position>2</Position>
+      <DataType>date|0</DataType>
+      <StateNumber>2202</StateNumber>
+    </column>
+    <column id="33" parent="13" name="return_date">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+      <StateNumber>2202</StateNumber>
+    </column>
+    <column id="34" parent="13" name="book_id">
+      <Position>4</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>2202</StateNumber>
+    </column>
+    <column id="35" parent="13" name="reader_id">
+      <Position>5</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>2202</StateNumber>
+    </column>
+    <index id="36" parent="13" name="borrow_pkey">
+      <ObjectId>34675</ObjectId>
+      <ColNames>borrow_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="37" parent="13" name="borrow_pkey">
+      <ObjectId>34676</ObjectId>
+      <ColNames>borrow_id</ColNames>
+      <UnderlyingIndexName>borrow_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="38" parent="13" name="fkaoppy97c8aq3998opip9mdbsq">
+      <ObjectId>34700</ObjectId>
+      <ColNames>book_id</ColNames>
+      <RefTableId>34667</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>book</RefTableName>
+      <RefKeyName>book_pkey1</RefKeyName>
+      <RefColNames>book_id</RefColNames>
+    </foreign-key>
+    <foreign-key id="39" parent="13" name="fklomy5nppewuuti2j542avuocd">
+      <ObjectId>34705</ObjectId>
+      <ColNames>reader_id</ColNames>
+      <RefTableId>34682</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>reader</RefTableName>
+      <RefKeyName>reader_pkey</RefKeyName>
+      <RefColNames>reader_id</RefColNames>
+    </foreign-key>
+    <column id="40" parent="14" name="id">
+      <Position>1</Position>
+      <DataType>bigint|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>708</StateNumber>
+    </column>
+    <column id="41" parent="14" name="mark">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>708</StateNumber>
+    </column>
+    <index id="42" parent="14" name="car_pkey">
+      <ObjectId>24588</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="43" parent="14" name="car_pkey">
+      <ObjectId>24589</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>car_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="44" parent="15" name="sequence_name">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2203</StateNumber>
+    </column>
+    <column id="45" parent="15" name="next_val">
+      <Position>2</Position>
+      <DataType>bigint|0</DataType>
+      <StateNumber>2203</StateNumber>
+    </column>
+    <index id="46" parent="15" name="hibernate_sequences_pkey">
+      <ObjectId>34680</ObjectId>
+      <ColNames>sequence_name</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="47" parent="15" name="hibernate_sequences_pkey">
+      <ObjectId>34681</ObjectId>
+      <ColNames>sequence_name</ColNames>
+      <UnderlyingIndexName>hibernate_sequences_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="48" parent="16" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>711</StateNumber>
+    </column>
+    <column id="49" parent="16" name="date">
+      <Position>2</Position>
+      <DataType>timestamp|0</DataType>
+      <StateNumber>711</StateNumber>
+    </column>
+    <column id="50" parent="16" name="isbn">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>711</StateNumber>
+    </column>
+    <column id="51" parent="16" name="last_name">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>711</StateNumber>
+    </column>
+    <column id="52" parent="16" name="name">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>711</StateNumber>
+    </column>
+    <column id="53" parent="16" name="price">
+      <Position>6</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>711</StateNumber>
+    </column>
+    <column id="54" parent="16" name="title">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>711</StateNumber>
+    </column>
+    <index id="55" parent="16" name="book_pkey">
+      <ObjectId>24596</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="56" parent="16" name="book_pkey">
+      <ObjectId>24597</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>book_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="57" parent="17" name="reader_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2208</StateNumber>
+    </column>
+    <column id="58" parent="17" name="last_name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>2208</StateNumber>
+    </column>
+    <column id="59" parent="17" name="name">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>2208</StateNumber>
+    </column>
+    <index id="60" parent="17" name="reader_pkey">
+      <ObjectId>34688</ObjectId>
+      <ColNames>reader_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="61" parent="17" name="reader_pkey">
+      <ObjectId>34689</ObjectId>
+      <ColNames>reader_id</ColNames>
+      <UnderlyingIndexName>reader_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
